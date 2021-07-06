@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="form-container form">
+  <form>
+    <div class="container">
+      <h1>Edit Profile</h1>
+      <p>Please fill in this form to update an account.</p>
+      <hr>
+      <label for="name"><b>Name </b></label>
+      <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="name" minlength="1">
+      <br />
+
+      <label for="city"><b>City</b></label>
+      <input type="text" [(ngModel)]="city" name="city" placeholder="City" class="city" minlength="1">
+      <br />
+
+      <div class="form-group">
+        <label for="gender"><b>Gender</b></label>
+
+        <div>
+
+          <label class="radio-inline"><input type="radio" value="Male" name="gender" [(ngModel)]="gender"> Male</label>
+          <label class="radio-inline"><input type="radio" value="Female" name="gender"
+              [(ngModel)]="gender"> Female</label>
+              <!-- <label class="radio-inline"><input type="radio" value="Others" name="gender"
+                [(ngModel)]="gender"> Others</label> -->
+          <br />
+        </div>
+      </div>
+
+
+
+      <!-- <label for="psw-repeat"><b>Repeat Password</b></label>
+          <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required"> It is required to repeat password </div>
+            <div *ngIf="password.errors.minlength"> Password must be at least 5 characters long. </div>
+        </div> -->
+      <hr>
+      <!-- <input type="file" accept="images/*" [formControl]='image'  (change)="fileSelected($event)" > -->
+      <br><br>
+      <button type="submit" class="registerbtn" (click)="UpdateProfile()"> Save</button>
+    </div>
+    <br>
+    <app-footer class="fot"></app-footer>
+

@@ -1,0 +1,20 @@
+sudo chmod 666 /var/run/docker.sock
+sudo chown root:docker /var/run/docker.sock
+docker container ls
+docker container ls -a
+docker image ls
+docker volume ls
+docker network ls
+docker image prune
+docker network prune
+docker volume prune
+docker stop $(docker ps -a -q)	
+docker rm $(docker ps -a -q)
+docker rmi -f $(docker images -a -q)
+stop and start service
+sudo service mongodb restart
+docker-compose -f docker-compose.yml up --build
+check whether mysql is running
+                   docker exec -it 843ccbead06d(container id) bash
+  connecting to mysql
+                    mysql -udbuser1 -p (edited) 

@@ -1,0 +1,162 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+sudo chmod 666 /var/run/docker.sock
+sudo chown root:docker /var/run/docker.sock
+
+
+
+
+
+------------
+To get image from Docker hub:
+docker pull mysql:latest
+To list all images : docker images
+To Remove images   : docker rmi <imagename>
+To List Containers : docker ps -a
+To Start Container : docker run -d --name=customname <imagename>
+To stop a container: docker stop <containername>
+To remove a container: docker rm <containername>
+To run commands inside a running container : docker exec -it <containername> bash
+To remove all stopped containers: docker container prune
+Steps for starting a mysql container:
+1. docker pull mysql:8.0.17
+2. docker images
+3. docker run -d -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -e MYSQL_USER=dbuser1 -e MYSQL_PASSWORD=pass -p 3306:3306 mysql:8.0.17
+4  docker exec -it <container-id> bash
+	root@7b2acc3a9f3f:/# mysql -udbuser1 -p
+	
+	=====> MySQl is Containerized
+	
+2. Containerize Spring Boot application
+	create a image using a Dockerfile
+- create a jar file for the spring project using Maven  => mvn clean package
+- Execute using java -jar <jarfilename>
+	
+	Dockerfile
+		- pull jre 8 from docker hub
+		- copy the spring boot jar file in to docker image
+		- run the jar file
+		- define the port where the app will run
+		- define environment variables
+	
+	Build the image using the dockerfile
+	
+	docker build -t userauthapp .
+	
+	
+	Start the container using the image
+	
+	docker run --network=host userauthapp:latest
+	
+	
+	
+Run my dockerized aplication
+	- start sql container
+	- start spring boot app container	
+	
+	
+  docker up
+  docker down
+  docker rmi $(docker images -aq) --force
+  we need to stop the local mysql server
+  docker rm -f containerid
+   running the docker compose
+   docker-compose -f docker-compose.yml up --build
+   killing the port number
+   sudo kill -9 $(sudo lsof -t -i:8081)
+  angular starting the application
+   docker build -t app .
+   docker build -t app .
+   docker run -p 8006:8006 53f2ae77db77   	
+	
+  docker rm $(docker ps -a -q)
+  docker rmi -f $(docker images -a -q)
+remove all the containers
+   docker rm $(docker ps -a -q)
+ps -ef | grep mongo
+kill 12345
+monogod --port 27017
+stop and start service
+   sudo service mongodb restart
+12:04
+package com.example.demo.controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class TestController {
+	@GetMapping("/test")
+	public String getInfo() {
+		return "Hi";
+	}
+}
+---------------------
+FROM java:8
+ADD ./target/DockerDemo-1-0.0.1-SNAPSHOT.jar DockerDemo-1-0.0.1-SNAPSHOT.jar
+EXPOSE 8081
+ENTRYPOINT ["java","-jar","DockerDemo-1-0.0.1-SNAPSHOT.jar"]
+----------------------------------------
+image
+docker build -t dockerdemo-1 .
+docker run --network=host dockerdemo-1:latest
+------------------
+docker build -t dockerdemo-1 .
+running the application
+docker run --network=host dockerdemo-1:latest
+
+-----------------------------
+sudo chmod 666 /var/run/docker.sock
+
+sudo chown root:docker /var/run/docker.sock
+-----------------------------------
+docker file
+docker compose
+docker images - file system and cofiguration(read only) which is used to create containers
+docker containers
+  running instances of docker images.
+   containers run the actual application
+  it includes all the application of its dependencies
+  dockerfile -> build -> images -> run in the containers (start, stop, restart) -> commit to the images
+ 
+1. First Spring Boot Project - POM (packaging)
+2. TestService1 and TestService2 project with the Spring Module Project which is part of Spring Boot POM project
+3. Copy the angular project complete and paste inside the Spring POM Project
+4. docker-compose file in the main project
+local runnig mysql and mongodb should be stopped
+  sudo service mysql stop
+  sudo service mongodb stop
+running the docker-compose 
+    docker-compose -f docker-compose.yml up --build
+check whether mysql is running
+  docker exec -it 843ccbead06d(container id) bash
+  connecting to mysql
+     mysql -udbuser1 -p
+  Postman
+   post -    http://localhost:8002/register
+   
+   Body
+       {
+    "username":"r",
+    "fullName":"raviram",
+    "password":"pass",
+    "role":"admin"
+     }
+ check whether mongo is running
+  docker exec -it 8a02da236d81 bash  
+  connecting to mongo
+    mongo
+  Postman
+   Post - http://localhost:8001/books/savebook
+  Body
+    {
+ "id" : "2",
+ "name" : "ram",
+ "author" : {
+     "id" :"101",
+     "name" : "satish"
+ }
+}
+ go to the angular folder which contains the dockerfile
+   docker build -t app . 
+  This is to check indepedent
+     docker run -p 8006:8006 app
+---------------------------------------------------
+docker-compose up --force-recreate

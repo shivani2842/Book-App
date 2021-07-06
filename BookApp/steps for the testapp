@@ -1,0 +1,72 @@
+docker file
+docker compose
+
+docker images - file system and cofiguration(read only) which is used to create containers
+docker containers
+  running instances of docker images.
+   containers run the actual application
+  it includes all the application of its dependencies
+
+
+  dockerfile -> build -> images -> run in the containers (start, stop, restart) -> commit to the images
+
+ 
+1. First Spring Boot Project - POM (packaging)
+2. TestService1 and TestService2 project with the Spring Module Project which is part of Spring Boot POM project
+3. Copy the angular project complete and paste inside the Spring POM Project
+4. docker-compose file in the main project
+
+
+local runnig mysql and mongodb should be stopped
+
+  sudo service mysql stop
+  sudo service mongodb stop
+
+running the docker-compose 
+    docker-compose -f docker-compose.yml up --build
+
+check whether mysql is running
+  docker exec -it 843ccbead06d(container id) bash
+
+  connecting to mysql
+     mysql -udbuser1 -p
+
+  Postman
+   post -    http://localhost:8002/register
+   
+
+   Body
+       {
+	"username":"r",
+	"fullName":"raviram",
+	"password":"pass",
+	"role":"admin"
+     }
+
+ check whether mongo is running
+  docker exec -it 8a02da236d81 bash  
+
+  connecting to mongo
+    mongo
+
+  Postman
+   Post - http://localhost:8001/books/savebook
+
+  Body
+    {
+ "id" : "2",
+ "name" : "ram",
+ "author" : {
+     "id" :"101",
+     "name" : "satish"
+ }
+}
+
+ go to the angular folder which contains the dockerfile
+   docker build -t app . 
+
+
+  This is to check indepedent
+     docker run -p 8006:8006 app
+
+

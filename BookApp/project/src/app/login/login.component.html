@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="form-container form" style="margin-bottom: 22vh;
+"> 
+    <form [formGroup]="loginform" (ngSubmit)="loginSubmit()">
+        <div class="container">
+          <h1>Login</h1>
+          <p>Please fill in the correct credentials to login</p>
+          <hr>
+          <label for="email"><b><span class="req">* </span>Email</b></label>
+          <input  type="email" [formControl]='username' placeholder="User Name" class="username" minlength="5">
+          <br/>
+              <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                  <div *ngIf="username.errors.required"> UserName is required. </div>
+                  <div *ngIf="username.errors.minlength"> UserName must be at least 5 characters long. </div>
+              </div>
+          <label for="psw"><b><span class="req">* </span>Password</b></label>
+            <input type="password" [formControl]='password' placeholder="Password" class="password" minlength="5"><br>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                <div *ngIf="password.errors.required"> Password is required. </div>
+                <div *ngIf="password.errors.minlength"> Password must be at least 5 characters long. </div>
+            </div>  
+          <button type="submit"   class="registerbtn">Login</button>
+        </div>
+        <div class="container signin">
+            <p>New User?
+                <button style="margin: 40px;" (click)="register()"  class ="register"  mat-raised-button matTooltip="Register"> Register Here</button>
+                <button [routerLink]="['/forget-password']" class ="register1"  mat-raised-button matTooltip="forget">Forgot Password</button>
+            </p>
+        </div>
+      </form>
+      </div>
+
+      <app-footer></app-footer>
